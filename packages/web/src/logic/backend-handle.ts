@@ -4,7 +4,7 @@ import { printLimitedContextMsg } from '../shared';
 import { PageLoader } from '../types';
 
 export function useBackendHandle(
-  iframeRef: RefObject<HTMLIFrameElement>,
+  iframeRef: RefObject<HTMLIFrameElement | null>,
   loader: PageLoader
 ) {
   return React.useMemo<DOMBackendHandle<Document, Window>>(

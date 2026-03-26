@@ -3,12 +3,12 @@ import { useMemo } from 'react';
 import {
   StyleProp,
   ViewStyle,
-  SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
   View
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import WebView, { WebViewProps } from 'react-native-webview';
 // import WebView from 'react-native-web-webview';
 import { WebViewSource } from 'react-native-webview/lib/WebViewTypes';
@@ -78,23 +78,22 @@ export const VisualTest = ({
   const Wrapper = useMemo(
     () =>
       scrollView
-        ? ({ children }: PropsWithChildren<{}>) => (
+        ? ({ children }: PropsWithChildren<unknown>) => (
             <ScrollView
               style={styles.container}
-              contentContainerStyle={[styles.content]}
-              children={children}
-            />
+              contentContainerStyle={[styles.content]}>
+              {children}
+            </ScrollView>
           )
-        : ({ children }: PropsWithChildren<{}>) => (
-            <View
-              style={[styles.container, styles.content]}
-              children={children}
-            />
+        : ({ children }: PropsWithChildren<unknown>) => (
+            <View style={[styles.container, styles.content]}>{children}</View>
           ),
     [scrollView]
   );
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#9c9c9c' }}>
+      {/* eslint-disable-next-line react-hooks/static-components */}
       <Wrapper>
         <View
           style={[
@@ -116,7 +115,6 @@ export const VisualTest = ({
           style={webViewStyle}
           containerStyle={containerStyle}
           source={source}
-          originWhitelist={[]}
           onNavigationStateChange={(state) =>
             console.info('Navigation State Change', state)
           }

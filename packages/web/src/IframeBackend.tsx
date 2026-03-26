@@ -1,5 +1,6 @@
 import React, { useRef, forwardRef, useImperativeHandle, useMemo } from 'react';
 import {
+  DimensionValue,
   StyleProp,
   StyleSheet,
   View,
@@ -12,9 +13,9 @@ import type {
   DOMBackendProps
 } from '@formidable-webview/ersatz-core';
 import {
-  defaultRenderError,
+  getEventBase,
   defaultRenderLoading,
-  getEventBase
+  defaultRenderError
 } from './shared';
 import { IframeWebViewProps, WebBackendState } from './types';
 import { usePageLoader } from './logic/navigation';
@@ -24,7 +25,7 @@ import { useErrorEffect } from './logic/error-effect';
 import { useMessageEffect } from './logic/message-effect';
 import { useDOMInitEffect } from './logic/dom-init-effect';
 import { useOriginWhitelistEffect } from './logic/origin-whitelist-effect';
-import { useIframeProps, defaultWebPolicies } from './logic/iframe-props';
+import { useIframeProps } from './logic/iframe-props';
 
 let globalFrameId = 0;
 
@@ -42,9 +43,15 @@ function useNormalizedDimensions(style: StyleProp<ViewStyle>) {
   };
 }
 
-export const IframeBackend: DOMBackendFunctionComponent<IframeWebViewProps> = forwardRef(
-  (props: DOMBackendProps<IframeWebViewProps> & ViewProps, ref) => {
-    const { renderLoading, renderError, onLayout, style, source } = props;
+export const IframeBackend: DOMBackendFunctionComponent<IframeWebViewProps> =
+  forwardRef((props: DOMBackendProps<IframeWebViewProps> & ViewProps, ref) => {
+    const {
+      renderLoading = defaultRenderLoading,
+      renderError = defaultRenderError,
+      onLayout,
+      style,
+      source
+    } = props;
     const iframeRef = useRef<HTMLIFrameElement>(null);
     const frameId = useRef(globalFrameId++).current;
     const navState = usePageLoader(source);
@@ -72,7 +79,7 @@ export const IframeBackend: DOMBackendFunctionComponent<IframeWebViewProps> = fo
       <View
         onLayout={onLayout}
         style={[
-          { width, height: wrapperHeight, minHeight: height },
+          { width, height: wrapperHeight as DimensionValue, minHeight: height },
           styles.container
         ]}>
         {unstable_createElement(
@@ -80,35 +87,17 @@ export const IframeBackend: DOMBackendFunctionComponent<IframeWebViewProps> = fo
           useIframeProps({
             ...backendState,
             onLoad: handleOnLoadEnd,
-            width,
+            width: width as string | number | undefined,
             style: styles.iframe
           })
         )}
         {syncState === 'error'
-          ? renderError!(undefined, 0, 'The iframe failed to load.')
+          ? renderError(undefined, 0, 'The iframe failed to load.')
           : null}
-        {syncState === 'loading' ? renderLoading!() : null}
+        {syncState === 'loading' ? renderLoading() : null}
       </View>
     );
-  }
-);
-
-const defaultProps: Partial<DOMBackendProps<IframeWebViewProps>> = {
-  allowsFullscreen: true,
-  geolocationEnabled: false,
-  lazyLoadingEnabled: false,
-  mediaPlaybackRequiresUserAction: true,
-  messagingEnabled: true,
-  originWhitelist: [],
-  allowsPayment: true,
-  renderError: defaultRenderError,
-  renderLoading: defaultRenderLoading,
-  sandboxEnabled: false,
-  seamlessEnabled: false,
-  webPolicies: defaultWebPolicies
-};
-
-IframeBackend.defaultProps = defaultProps;
+  });
 
 const styles = StyleSheet.create({
   iframe: {

@@ -53,22 +53,25 @@ export interface ComponentClassWithHandle<H, P> extends ComponentClass<P> {
   new (props: P, context?: any): ComponentInstanceWithRef<H, P>;
 }
 
-export interface FunctionComponentWithRef<H, P>
-  extends React.ForwardRefExoticComponent<P & React.RefAttributes<H>> {}
+export interface FunctionComponentWithRef<
+  H,
+  P
+> extends React.ForwardRefExoticComponent<P & React.RefAttributes<H>> {}
 
 export type ComponentTypeWithRef<H, P> =
   | ComponentClassWithHandle<H, P>
   | FunctionComponentWithRef<H, P>;
 
 export interface DOMBackendComponentInstance<O = {}>
-  extends Component<DOMBackendProps<O>, any>,
-    DOMBackendHandle {}
+  extends Component<DOMBackendProps<O>, any>, DOMBackendHandle {}
 
-export interface DOMBackendComponentClass<O = {}>
-  extends ComponentClassWithHandle<DOMBackendHandle, DOMBackendProps<O>> {}
+export interface DOMBackendComponentClass<
+  O = {}
+> extends ComponentClassWithHandle<DOMBackendHandle, DOMBackendProps<O>> {}
 
-export interface DOMBackendFunctionComponent<O = {}>
-  extends FunctionComponentWithRef<DOMBackendHandle, DOMBackendProps<O>> {}
+export interface DOMBackendFunctionComponent<
+  O = {}
+> extends FunctionComponentWithRef<DOMBackendHandle, DOMBackendProps<O>> {}
 
 export type DOMBackendComponent<O = {}> =
   | DOMBackendComponentClass<O>

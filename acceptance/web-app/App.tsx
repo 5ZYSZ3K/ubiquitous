@@ -1,10 +1,13 @@
-/* eslint-disable react-native/no-inline-styles */
 import 'react-native-gesture-handler';
 import Constants from 'expo-constants';
 import React from 'react';
 import { Button, Dimensions, StyleSheet, Text, View } from 'react-native';
 import { VisualTest, VisualTestProps } from './src/VisualTest';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import {
+  NavigationContainer,
+  NavigationProp,
+  useNavigation
+} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { FlatList } from 'react-native-gesture-handler';
 
@@ -66,11 +69,7 @@ const examples: VisualTestProps[] = [
       height: 320,
       width: 320
     },
-    scrollView: true,
-    extraProps: {
-      // sandbox: "allow-same-origin",
-      seamlessEnabled: true
-    }
+    scrollView: true
   },
   {
     title: 'HTML in View',
@@ -146,7 +145,7 @@ const examples: VisualTestProps[] = [
 ];
 
 function HomeScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProp<Record<string, undefined>>>();
   return (
     <FlatList
       data={examples}

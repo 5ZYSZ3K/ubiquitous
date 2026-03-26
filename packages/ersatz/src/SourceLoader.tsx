@@ -25,7 +25,7 @@ export interface NormalSource {
 }
 
 function isSourceUri(source: WebViewSource): source is WebViewSourceUri {
-  return !!(source as any).uri ?? false;
+  return !!(source as WebViewSourceUri).uri;
 }
 
 function isWebViewSource(source: unknown): source is WebViewSource {
@@ -99,9 +99,9 @@ export function SourceLoader({
   const content = errorReason
     ? errorElement
     : normalizedSource
-    ? children(normalizedSource)
-    : typeof renderLoading === 'function'
-    ? renderLoading()
-    : null;
+      ? children(normalizedSource)
+      : typeof renderLoading === 'function'
+        ? renderLoading()
+        : null;
   return <View testID="ersatz-source-loader">{content}</View>;
 }

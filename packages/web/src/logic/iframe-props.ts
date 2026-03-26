@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import type { JSX, HTMLAttributeReferrerPolicy } from 'react';
 import { WebBackendState } from '../types';
 import {
   compileWebPoliciesToAllowAttr,
@@ -58,12 +59,14 @@ export function useIframeProps({
       mediaPlaybackRequiresUserAction
     ]
   );
-  const allow = useMemo(() => compileWebPoliciesToAllowAttr(permissions), [
-    permissions
-  ]);
-  const sandbox = useMemo(() => compileWebPoliciesToSandboxAttr(permissions), [
-    permissions
-  ]);
+  const allow = useMemo(
+    () => compileWebPoliciesToAllowAttr(permissions),
+    [permissions]
+  );
+  const sandbox = useMemo(
+    () => compileWebPoliciesToSandboxAttr(permissions),
+    [permissions]
+  );
   return useMemo(() => {
     const iframeProps: IframeProps = {
       width,
@@ -82,7 +85,8 @@ export function useIframeProps({
       iframeProps.csp = csp;
     }
     if (referrerPolicy) {
-      iframeProps.referrerPolicy = referrerPolicy;
+      iframeProps.referrerPolicy =
+        referrerPolicy as HTMLAttributeReferrerPolicy;
     }
     if (allowsPayment) {
       iframeProps.allowpaymentrequest = 'true';

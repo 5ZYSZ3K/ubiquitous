@@ -10,7 +10,7 @@
   "scripts": {
     "test": "npm run test:ts && npm run test:lint",
     "test:ts": "tsc --noEmit",
-    "test:lint": "eslint --ext ts,tsx src/"
+    "test:lint": "eslint 'src/**/*.{ts,tsx}'"
   },
   "repository": {
     "type": "git",
@@ -26,16 +26,16 @@
   },
   "homepage": "https://github.com/formidable-webview/ubiquitous/tree/master/packages/ersatz-core#readme",
   "devDependencies": {
-    "@release-it/conventional-changelog": "^2.0.0",
-    "@tsconfig/react-native": "^1.0.2",
-    "@types/react": "^16.9.51",
-    "@types/react-native": "^0.63.25",
-    "eslint": "^7.10.0",
-    "react": "16.13.1",
-    "react-native": "^0.63.3",
-    "react-native-webview": "^10.9.2",
-    "release-it": "^14.0.3",
-    "typescript": "~3.9.7"
+    "@release-it/conventional-changelog": "^10.0.6",
+    "@tsconfig/react-native": "^3.0.9",
+    "@types/react": "^19.2.14",
+    "@types/react-native": "^0.73.0",
+    "eslint": "^10.1.0",
+    "react": "19.2.0",
+    "react-native": "0.83.2",
+    "react-native-webview": "13.16.0",
+    "release-it": "^19.2.4",
+    "typescript": "~5.9.2"
   },
   "peerDependencies": {
     "react": "*",

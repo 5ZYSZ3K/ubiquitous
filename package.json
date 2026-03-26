@@ -25,7 +25,8 @@
     "release:skeletton": "yarn workspace @formidable-webview/skeletton release-it",
     "release:ersatz-testing": "yarn workspace @formidable-webview/ersatz-testing release-it",
     "release:ersatz": "yarn workspace @formidable-webview/ersatz release-it",
-    "release:web": "yarn workspace @formidable-webview/web release-it"
+    "release:web": "yarn workspace @formidable-webview/web release-it",
+    "prepare": "husky"
   },
   "repository": {
     "type": "git",
@@ -35,37 +36,33 @@
   "license": "MIT",
   "homepage": "https://github.com/formidable-webview/ubiquitous#readme",
   "devDependencies": {
-    "@commitlint/cli": "^11.0.0",
-    "@commitlint/config-conventional": "^11.0.0",
-    "@react-native-community/eslint-config": "^2.0.0",
-    "@tsconfig/react-native": "^1.0.2",
-    "commitlint": "^11.0.0",
-    "eslint": "^7.10.0",
-    "eslint-config-prettier": "^6.12.0",
-    "eslint-plugin-compat": "^3.8.0",
-    "eslint-plugin-prettier": "^3.1.4",
-    "husky": "^4.3.0",
-    "prettier": "^2.1.2"
+    "@commitlint/cli": "^20.5.0",
+    "@commitlint/config-conventional": "^20.5.0",
+    "@tsconfig/react-native": "^3.0.9",
+    "commitlint": "^20.5.0",
+    "eslint": "^10.1.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-compat": "^6.2.1",
+    "eslint-plugin-jest": "^29.15.1",
+    "eslint-plugin-prettier": "^5.5.5",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "husky": "^9.1.7",
+    "prettier": "^3.8.1",
+    "typescript-eslint": "^8.57.2"
   },
   "resolutions": {
-    "@release-it/conventional-changelog": "patch:@release-it/conventional-changelog@2.0.0#patches/@release-it-conventional-changelog.patch",
-    "release-it": "patch:release-it@14.0.4#patches/release-it.patch",
-    "react": "16.13.1",
-    "react-dom": "16.13.1",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-39.0.3.tar.gz"
+    "react": "19.2.0",
+    "react-dom": "19.2.0"
   },
   "commitlint": {
     "extends": [
       "@commitlint/config-conventional"
     ]
   },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
-  },
   "workspaces": [
     "packages/*",
     "acceptance/*"
-  ]
+  ],
+  "packageManager": "yarn@4.12.0"
 }

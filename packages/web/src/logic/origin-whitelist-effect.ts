@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 /// <reference lib="dom" />
 import { DOMBackendHandle } from '@formidable-webview/ersatz-core';
 import { useEffect } from 'react';

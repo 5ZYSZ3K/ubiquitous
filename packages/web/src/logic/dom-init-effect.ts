@@ -33,13 +33,11 @@ export function useDOMInitEffect({
         const activeElement = ifwindow?.document.activeElement;
         if (isActiveElementAnchor(activeElement)) {
           const targetUrl = activeElement.href;
-          const {
-            shouldOpenUrl,
-            shouldStart
-          } = webViewLifecycle.shouldStartLoadEvent(
-            onShouldStartLoadWithRequest,
-            targetUrl
-          );
+          const { shouldOpenUrl, shouldStart } =
+            webViewLifecycle.shouldStartLoadEvent(
+              onShouldStartLoadWithRequest,
+              targetUrl
+            );
           if (!shouldStart && !shouldOpenUrl) {
             loader.reload();
           }
@@ -58,18 +56,18 @@ export function useDOMInitEffect({
               );
             }
           };
-        } catch (e) {}
+        } catch {}
       }
       try {
         ifwindow?.addEventListener('beforeunload', handleBeforeUnload);
-      } catch (e) {}
+      } catch {}
       if (injectedJavaScriptBeforeContentLoaded) {
         backendHandle.injectJavaScript(injectedJavaScriptBeforeContentLoaded);
       }
       return () => {
         try {
           ifwindow?.removeEventListener('beforeunload', handleBeforeUnload);
-        } catch (e) {}
+        } catch {}
       };
     },
     [

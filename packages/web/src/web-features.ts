@@ -71,8 +71,8 @@ export function compileWebPoliciesToAllowAttr(map: WebPoliciesMap) {
           map[featName] === false
             ? " 'none'"
             : map[featName] === true
-            ? ''
-            : ' ' + map[featName]
+              ? ''
+              : ' ' + map[featName]
         }`
     )
     .join('; ');

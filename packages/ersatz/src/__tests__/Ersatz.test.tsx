@@ -148,9 +148,13 @@ describe('WebView component', () => {
   });
   it('should render a source loader when a source prop is passed', async () => {
     const renderAPI = render(<Ersatz source={{ html: '<div></div>' }} />);
-    await renderAPI.findByTestId('ersatz-source-loader', {
-      timeout: 10
-    });
+    await renderAPI.findByTestId(
+      'ersatz-source-loader',
+      {},
+      {
+        timeout: 10
+      }
+    );
     await waitForErsatz(renderAPI);
   });
   describe('regarding instance methods', () => {
@@ -325,8 +329,7 @@ describe('WebView component', () => {
             onLoadStart={onLoadStart}
             onLoad={onLoad}
             source={{
-              html:
-                '<!DOCTYPE html><html><head><title>Hello world</title></head><body><header></header></body></html>'
+              html: '<!DOCTYPE html><html><head><title>Hello world</title></head><body><header></header></body></html>'
             }}
           />
         )

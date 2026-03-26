@@ -163,7 +163,7 @@ export interface PageLoadState {
 }
 
 export type WebBackendState = {
-  iframeRef: RefObject<HTMLIFrameElement>;
+  iframeRef: RefObject<HTMLIFrameElement | null>;
   frameId: number;
   ownerOrigin: string;
   eventBase: EventBase;

@@ -4,7 +4,7 @@ import type {
   DOMBackendHandle,
   DOMBackendProps
 } from '@formidable-webview/ersatz-core';
-import { SourceLoader } from './SourceLoader';
+import { SourceLoader, NormalSource } from './SourceLoader';
 import { JSDOMDOMEngine } from './JSDOMEngine';
 
 export const JSDOMBackend: DOMBackendFunctionComponent = forwardRef<
@@ -22,7 +22,7 @@ export const JSDOMBackend: DOMBackendFunctionComponent = forwardRef<
     ref
   ) => {
     const renderBackend = React.useCallback(
-      (normalizedSource) => (
+      (normalizedSource: NormalSource) => (
         <JSDOMDOMEngine ref={ref} {...normalizedSource} {...props} />
       ),
       // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -30,13 +30,13 @@ export const JSDOMBackend: DOMBackendFunctionComponent = forwardRef<
     );
     return (
       <SourceLoader
-        children={renderBackend}
         renderLoading={renderLoading}
         renderError={renderError}
         onHttpError={onHttpError}
         source={source}
-        cancelled={false}
-      />
+        cancelled={false}>
+        {renderBackend}
+      </SourceLoader>
     );
   }
 );

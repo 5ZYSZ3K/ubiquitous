@@ -49,7 +49,7 @@ export function isActiveElementAnchor(
 
 const createOnShouldStartLoadWithRequest = (
   originWhitelist: readonly string[],
-  iframeRef: RefObject<HTMLIFrameElement>,
+  iframeRef: RefObject<HTMLIFrameElement | null>,
   onShouldStartLoadWithRequest?: OnShouldStartLoadWithRequest
 ) => {
   return (event: ShouldStartLoadRequest) => {

@@ -88,11 +88,12 @@ const BackendRenderer = forwardRef<DOMBackendHandle, SkelettonProps>(
   }
 );
 export class Skeletton<
-    D extends DocumentShape = DocumentShape,
-    W extends WindowShape = WindowShape
-  >
+  D extends DocumentShape = DocumentShape,
+  W extends WindowShape = WindowShape
+>
   extends PureComponent<WebViewProps & { DOMBackend: DOMBackendComponent }>
-  implements DOMBackendHandle {
+  implements DOMBackendHandle
+{
   static defaultProps: Partial<WebViewProps> = {
     javaScriptEnabled: true
   };

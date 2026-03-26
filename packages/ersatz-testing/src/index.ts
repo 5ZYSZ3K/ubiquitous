@@ -1,5 +1,5 @@
 import type { Component } from 'react';
-import type { RenderAPI, WaitForOptions } from '@testing-library/react-native';
+import type { RenderAPI } from '@testing-library/react-native';
 import type {
   DOMBackendState,
   DOMBackendHandle,
@@ -11,7 +11,7 @@ import Skeletton from '@formidable-webview/skeletton';
 /**
  * An object to customize the waiting logic.
  */
-export interface WaitForErsatzOptions extends WaitForOptions {
+export interface WaitForErsatzOptions {
   /**
    * At which loading cycle should the instance be returned?
    *
@@ -30,6 +30,8 @@ export interface WaitForErsatzOptions extends WaitForOptions {
    * @defaultValue 300
    */
   timeout?: number;
+  interval?: number;
+  onTimeout?: (error: Error) => Error;
 }
 
 declare function expect(something: any): any;
@@ -55,10 +57,11 @@ export async function waitForErsatz<
     timeout = 300,
     ...waitForOptions
   } = options;
-  await findByTestId(`backend-${loadingState}-${loadCycleId}`, {
-    timeout,
-    ...waitForOptions
-  });
+  await findByTestId(
+    `backend-${loadingState}-${loadCycleId}`,
+    {},
+    { timeout, ...waitForOptions }
+  );
   const { instance: skel } = UNSAFE_getByType(Skeletton);
   expect(skel).toBeTruthy();
   return skel;

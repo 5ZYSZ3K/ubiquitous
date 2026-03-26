@@ -28,7 +28,7 @@
     "test": "yarn run test:jest && yarn run test:ts && yarn run test:lint",
     "test:jest": "jest src/",
     "test:ts": "tsc --noEmit",
-    "test:lint": "eslint --ext ts,tsx src/",
+    "test:lint": "eslint 'src/**/*.{ts,tsx}'",
     "build": "bob build",
     "docgen": "asciidoctor -b docbook -a leveloffset=+1 -o - README.adoc | pandoc --atx-headers -t gfm -f docbook - > README.md",
     "prepack": "yarn build; yarn docgen"
@@ -36,43 +36,46 @@
   "dependencies": {
     "@formidable-webview/ersatz-core": "workspace:*",
     "@formidable-webview/skeletton": "workspace:*",
-    "escape-string-regexp": "^4.0.0"
+    "escape-string-regexp": "^5.0.0"
   },
   "peerDependencies": {
     "react": "*",
     "react-native": "*",
-    "react-native-web": ">=12.0.0"
+    "react-native-web": ">=0.14.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.11.6",
-    "@babel/core": "^7.11.6",
-    "@babel/plugin-transform-react-jsx": "^7.10.4",
-    "@babel/preset-typescript": "^7.10.4",
-    "@babel/runtime": "^7.11.2",
-    "@react-native-community/bob": "^0.16.2",
-    "@release-it/conventional-changelog": "^2.0.0",
-    "@testing-library/react-native": "^7.0.2",
-    "@types/assert": "^1.5.2",
-    "@types/jest": "^26.0.14",
-    "@types/react": "^16.9.51",
-    "@types/react-native": "^0.63.25",
-    "@types/react-test-renderer": "^16.9.3",
-    "babel-jest": "^26.5.2",
-    "eslint": "^7.10.0",
-    "jest": "^26.5.2",
-    "metro-react-native-babel-preset": "^0.63.0",
-    "react": "16.13.1",
-    "react-dom": "16.13.1",
-    "react-native": "^0.63.3",
-    "react-native-web": "^0.14.5",
-    "react-test-renderer": "16.13.1",
-    "release-it": "^14.0.3",
-    "typescript": "~3.9.7"
+    "@babel/cli": "^7.28.6",
+    "@babel/core": "^7.29.0",
+    "@babel/plugin-transform-react-jsx": "^7.28.6",
+    "@babel/preset-typescript": "^7.28.5",
+    "@babel/runtime": "^7.29.2",
+    "@react-native/babel-preset": "^0.84.1",
+    "@release-it/conventional-changelog": "^10.0.6",
+    "@testing-library/react-native": "^13.3.3",
+    "@types/assert": "^1.5.11",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.2.14",
+    "@types/react-native": "^0.73.0",
+    "@types/react-test-renderer": "^19.1.0",
+    "babel-jest": "^30.3.0",
+    "eslint": "^10.1.0",
+    "jest": "^30.3.0",
+    "jest-environment-jsdom": "^30.3.0",
+    "prettier": "^3.8.1",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "react-native": "0.83.2",
+    "react-native-builder-bob": "^0.40.18",
+    "react-native-web": "^0.21.2",
+    "react-test-renderer": "19.2.0",
+    "release-it": "^19.2.4",
+    "typescript": "~5.9.2"
   },
   "publishConfig": {
     "access": "public"
   },
-  "@react-native-community/bob": {
+  "react-native-builder-bob": {
     "source": "src",
     "output": "lib",
     "targets": [
